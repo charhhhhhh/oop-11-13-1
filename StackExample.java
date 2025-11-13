@@ -1,21 +1,26 @@
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class MyStack<T> {
 
-    public ArrayList<T> list = new ArrayList<>();
+    public Object[] list = new Object[1000];
+    public int index;
 
     public MyStack() {
-
+        index = 0;
     }
 
     public void push(T item) {
-        list.add(item);
+        index++;
+        list[index] = item;
     }
 
     public T pop() {
-        T temp = list.get(size());
-        list.remove(size());
-        return temp;
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        Object temp = list[index];
+        index--;
+        return (T) temp;
     }
 
     // 检查栈是否为空
@@ -25,7 +30,7 @@ class MyStack<T> {
 
     // 返回栈中的元素数量
     public int size() {
-        return list.size();
+        return index;
     }
 }
 
